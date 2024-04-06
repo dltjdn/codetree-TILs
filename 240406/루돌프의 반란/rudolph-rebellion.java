@@ -42,28 +42,27 @@ public class Main {
         for(int t=1; t<=M; t++){
       
             // ====루돌프==================
-            int closestX = Integer.MAX_VALUE;
-            int closestY = Integer.MAX_VALUE;
-            int closestDist = Integer.MAX_VALUE;
-            int closestIdx = 0;
+           int closestX = 10000;
+			int closestY = 10000;
+			//int closestDist = Integer.MAX_VALUE;
+			int closestIdx = 0;
 
-            // 살아있는 산타 중 루돌프에 가장 가까운 산타를 찾습니다.
-            for(int i=1; i<=P; i++){
-                if(isDead[i]) continue;
+			// 살아있는 산타 중 루돌프에 가장 가까운 산타를 찾습니다.
+			for (int i = 1; i <= P; i++) {
+				if (isDead[i])continue;
 
-                Point santa = santas.get(i);
-        
-                Tuple cur = new Tuple(rudolf.getDistance(santa), santa.r, santa.c);
-                Tuple best = new Tuple(closestDist, closestX, closestY);
-               
-               if(cur.compareTo(best) < 0){
-                    closestX = santa.r;
-                    closestY = santa.c;
-                    closestDist = rudolf.getDistance(santa);
-                    closestIdx = i;
-               }
-            
-            }
+				Point santa = santas.get(i);
+
+				Tuple cur = new Tuple(rudolf.getDistance(santa), santa.r, santa.c);
+				Tuple best = new Tuple(rudolf.getDistance(new Point(closestX, closestY)), closestX, closestY);
+
+				if (cur.compareTo(best) < 0) {
+					closestX = santa.r;
+					closestY = santa.c;
+					closestIdx = i;
+				}
+
+			}
 
             // 가장 가까운 산타로 루돌프가 이동
           
