@@ -184,43 +184,43 @@ public class Main {
                         if (D == 1) {
 	                            point[i] += D;
 	                    } else {
-                               while(inRange(lastR,lastC) && map[lastR][lastC] > 0 ) {
-                            lastR -= dr[moveDir];
-                            lastC -= dc[moveDir];
-                        }
+                            while(inRange(lastR,lastC) && map[lastR][lastC] > 0 ) {
+                                    lastR -= dr[moveDir];
+                                    lastC -= dc[moveDir];
+                            }
 
-                        while(firstR != lastR || firstC != lastC){
-                            int beforeR = lastR + dr[moveDir];
-                            int beforeC = lastC + dc[moveDir];
-                            
-                            if(!inRange(beforeR,beforeC)) break;
-                            int idx = map[beforeR][beforeC];
+                            while(!(firstR == lastR && firstC == lastC)){
+                                    int beforeR = lastR + dr[moveDir];
+                                    int beforeC = lastC + dc[moveDir];
+                                    
+                                    if(!inRange(beforeR,beforeC)) break;
+                                    int idx = map[beforeR][beforeC];
 
-                            if(inRange(lastR, lastC)){
-                                map[lastR][lastC] = map[beforeR][beforeC];
-                                santas.put(idx, new Point(lastR,lastC));
-                            }else{
-                                isDead[idx] = true;
-                            } 
-                            
+                                    if(inRange(lastR, lastC)){
+                                        map[lastR][lastC] = map[beforeR][beforeC];
+                                        santas.put(idx, new Point(lastR,lastC));
+                                    }else{
+                                        isDead[idx] = true;
+                                    } 
+                                    
 
-                            lastR = beforeR;
-                            lastC = beforeC;
-                        }
+                                    lastR = beforeR;
+                                    lastC = beforeC;
+                            }
 
-                        // 포인트 획득
-                        point[i] += D;
-                        
-                        if(inRange(firstR, firstC)){
-         
-                            map[firstR][firstC] = i;
-                            santas.put(i, new Point(firstR,firstC));
-                        }else{
-                    
-                            isDead[i] = true;
-                        } 
+                                // 포인트 획득
+                                point[i] += D;
+                                
+                                if(inRange(firstR, firstC)){
                 
+                                    map[firstR][firstC] = i;
+                                    santas.put(i, new Point(firstR,firstC));
+                                }else{
+                                
+                                        isDead[i] = true;
+                                } 
                             
+                                    
                         }
                      
 
