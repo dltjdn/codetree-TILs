@@ -1,5 +1,7 @@
+import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 import java.io.*;
-import java.util.*;
 
 public class Main {
 	static int N;
@@ -42,14 +44,14 @@ public class Main {
         for(int t=1; t<=M; t++){
       
             // ====루돌프==================
-           int closestX = 10000;
+            int closestX = 10000;
 			int closestY = 10000;
-			//int closestDist = Integer.MAX_VALUE;
+	
 			int closestIdx = 0;
 
 			// 살아있는 산타 중 루돌프에 가장 가까운 산타를 찾습니다.
 			for (int i = 1; i <= P; i++) {
-				if (isDead[i])continue;
+				if (isDead[i]) continue;
 
 				Point santa = santas.get(i);
 
@@ -116,23 +118,28 @@ public class Main {
                         lastC = beforeC;
                     }
                     
+                    santas.put(closestIdx, new Point(firstR,firstC));
+                    point[closestIdx] += C;
+                    
                     if(inRange(firstR, firstC)){
                 
                         map[firstR][firstC] = closestIdx;
-                        santas.put(closestIdx, new Point(firstR,firstC));
+                     
                     }else{
                     
                         isDead[closestIdx] = true;
                     } 
                     
+                   
+                  
                     
-
-                    // 포인트 획득
-                    point[closestIdx] += C;
-                    map[rudolf.r][rudolf.c] = -1; 
                 }
                
-     
+                map[rudolf.r][rudolf.c] = -1; 
+                 if(t==8 || t==9) {
+        	        System.out.println("루돌프의위치" +t+"판"+rudolf.r+rudolf.c);
+                }
+          
 
             }
         	
@@ -140,8 +147,8 @@ public class Main {
             // ========== 산타 ===========
             // 각 산타들은 루돌프와 가까운 방향으로 한 칸 이동
             
-            int[] dr = {-1,1,0,0};
-            int[] dc = {0,0,-1,1};
+            int[] dr =  {-1, 0, 1, 0};
+            int[] dc = {0, 1, 0, -1};
  
             for(int i=1; i<=P; i++){
                 if(isDead[i] || stun[i] >= t ) continue;
@@ -167,18 +174,21 @@ public class Main {
 
                 // 산타 이동
                 if(moveDir != -1){
-                    map[santa.r][santa.c] = 0;
-                    santa.r += dr[moveDir];
-                    santa.c += dc[moveDir];
+                	int nx = santa.r + dr[moveDir];
+                    int ny = santa.c + dc[moveDir];
 
 
                     // 이동한 산타와 루돌프가 "충돌"할 경우, 산타를 이동 - D점 획득
-                    if(santa.r == rudolf.r && santa.c == rudolf.c){
-                        int firstR = santa.r - dr[moveDir] * D;
-                        int firstC = santa.c - dc[moveDir] * D;
+                    if(nx == rudolf.r && ny == rudolf.c){
+                   
+                        stun[i] = t+1; // 기절
+                        int moveX = -dr[moveDir];
+                        int moveY = -dc[moveDir];
+                        
+                        int firstR = nx + moveX * D;
+                        int firstC = ny + moveY * D;
                         int lastR = firstR;
                         int lastC = firstC;
-                        stun[i] = t+1; // 기절
 
                         // 이동한 곳에 산타 있을 때 "상호작용"
                         if (D == 1) {
@@ -190,8 +200,8 @@ public class Main {
                             }
 
                             while(!(firstR == lastR && firstC == lastC)){
-                                    int beforeR = lastR + dr[moveDir];
-                                    int beforeC = lastC + dc[moveDir];
+                                    int beforeR = lastR - moveX;
+                                    int beforeC = lastC - moveY;
                                     
                                     if(!inRange(beforeR,beforeC)) break;
                                     int idx = map[beforeR][beforeC];
@@ -210,14 +220,13 @@ public class Main {
 
                                 // 포인트 획득
                                 point[i] += D;
+                                map[santa.r][santa.c] = 0;
+                                santas.put(i, new Point(firstR,firstC));
                                 
                                 if(inRange(firstR, firstC)){
-                
-                                    map[firstR][firstC] = i;
-                                    santas.put(i, new Point(firstR,firstC));
+                                    map[firstR][firstC] = i;                                
                                 }else{
-                                
-                                        isDead[i] = true;
+                                    isDead[i] = true;
                                 } 
                             
                                     
@@ -225,8 +234,10 @@ public class Main {
                      
 
                     }else{ // 충돌하지 않은 경우
-                        map[santa.r][santa.c] = i;
-                        santas.put(i, new Point(santa.r, santa.c));
+                    	
+                        map[santa.r][santa.c] = 0;
+                        map[nx][ny] = i;
+                        santas.put(i, new Point(nx, ny));
                     }
                    
                 }
@@ -234,11 +245,27 @@ public class Main {
    
 
             }
+//
+//             if(t==8 || t==9) {
+//            	for (int i = 1; i <= p; i++) {
+//
+//              	   System.out.println("거북의위치" +t+"판" + santa.get(i).r+ santa.get(i).c);
+//            	}
+//            	
+//            	
+//            }
+           
+
 
             for(int i=1; i<=P; i++){
                 if(!isDead[i]) point[i]++;
             }
             
+           for(int i=1; i<=P ; i++) {
+        	   System.out.print(point[i]+" ");
+           }
+           
+           System.out.println();
            
 
         }
