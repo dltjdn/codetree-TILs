@@ -1,13 +1,14 @@
+import java.io.*;
+import java.util.*;
+
 public class Main {
-    static int map[][];
-    static int stun[];
-    static boolean isLive[];
-   
-    public static void main(String[] args) {
+	static int N;
+	
+    public static void main(String[] args) throws IOException {
         // 여기에 코드를 작성해주세요.
-        BufferdReader bf = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         String[] line = bf.readLine().split(" ");
-        int N = Integer.parseInt(line[0]);
+        N = Integer.parseInt(line[0]);
         int M = Integer.parseInt(line[1]);
         int P = Integer.parseInt(line[2]);
         int C = Integer.parseInt(line[3]);
@@ -15,9 +16,11 @@ public class Main {
         
         int[][] map = new int[N+1][N+1];
         
+        
+        
         int[] stun = new int[P+1]; // 기절 2,1,0
-        int[] isDead = new boolean[P+1]; // 죽은지 여부
-        int[] ponit = new int[P+1];
+        boolean[] isDead = new boolean[P+1]; // 죽은지 여부
+        int[] point = new int[P+1];
 
 
         String[] line2 = bf.readLine().split(" ");
@@ -27,16 +30,17 @@ public class Main {
         map[rr][rc] = -1;
 
         Map<Integer,Point> santas = new HashMap<>();
-        for(int i=0; i<P ; i++){
+        for(int i=1; i<=P ; i++){
             String[] row = bf.readLine().split(" ");
             int num = Integer.parseInt(row[0]);
             int sr = Integer.parseInt(row[1]);
             int sc= Integer.parseInt(row[2]);
-            santans.put(num, new Point(sr, sc));
+            santas.put(num, new Point(sr, sc));
             map[sr][sc] = num;
         }
 
         for(int t=1; t<=M; t++){
+      
             // ====루돌프==================
             int closestX = Integer.MAX_VALUE;
             int closestY = Integer.MAX_VALUE;
@@ -50,30 +54,31 @@ public class Main {
                 Point santa = santas.get(i);
         
                 Tuple cur = new Tuple(rudolf.getDistance(santa), santa.r, santa.c);
-                Tuplde best = new Tuple(closestDist, closestX, closestY)
+                Tuple best = new Tuple(closestDist, closestX, closestY);
                
                if(cur.compareTo(best) < 0){
                     closestX = santa.r;
                     closestY = santa.c;
-                    cloestDist = rudolf.getDistance(santa);
+                    closestDist = rudolf.getDistance(santa);
                     closestIdx = i;
                }
             
             }
 
             // 가장 가까운 산타로 루돌프가 이동
+          
             if(closestIdx != 0){
                 map[rudolf.r][rudolf.c] = 0;
                 int moveR = 0;
                 if(rudolf.r < closestX) moveR = 1;
-                else if(rudolf.r > closestY) moveR = -1;
+                else if(rudolf.r > closestX) moveR = -1;
 
                 int moveC = 0;
-                if(rudolf.c < closetst.c) moveC = 1;
-                else if(rudolf.c > closetst.c;) moveC = -1;
+                if(rudolf.c < closestY) moveC = 1;
+                else if(rudolf.c > closestY) moveC = -1;
             
-                rudolf.r += moveX;
-                rudolf.c += moveY;
+                rudolf.r += moveR;
+                rudolf.c += moveC;
                
                
                 // 이동한 루돌프와 산타가 "충돌"할 경우, 산타를 이동 - C점 획득
@@ -91,34 +96,48 @@ public class Main {
                         lastC += moveC;
                     }
 
-                    While(firstR-1 != lastR || firstC-1 != lastC){
+                    while(!(firstR == lastR && firstC == lastC)){
                         int beforeR = lastR - moveR;
                         int beforeC = lastC - moveC;
                         
-                        if(inRange(beforeR,beforeC)){
-                            int idx = map[beforeR][beforeC];
+                        if(!inRange(beforeR,beforeC)) break;
+                        int idx = map[beforeR][beforeC];
 
-                            if(inRange(lastR, lastC)){
-                                map[lastR][lastC] = map[beforeR][beforeC];
-                                santas.put(idx, new Point(lastR,lastC));
-                            }else{
-                                isDead[idx] = true;
-                            } 
-                        }
+                        if(inRange(lastR, lastC)){
+            
+                            map[lastR][lastC] = map[beforeR][beforeC];
+                            santas.put(idx, new Point(lastR,lastC));
+                        }else{
+                
+                            isDead[idx] = true;
+                        } 
+                        
 
                         lastR = beforeR;
-                        lastsC = beforeC;
+                        lastC = beforeC;
                     }
+                    
+                    if(inRange(firstR, firstC)){
+                
+                        map[firstR][firstC] = closestIdx;
+                        santas.put(closestIdx, new Point(firstR,firstC));
+                    }else{
+                    
+                        isDead[closestIdx] = true;
+                    } 
+                    
+                    
 
                     // 포인트 획득
                     point[closestIdx] += C;
-
+                    map[rudolf.r][rudolf.c] = -1; 
                 }
-                map[rudolf.r][rudolf.c] = -1; 
+               
      
 
             }
-
+        	
+        
             // ========== 산타 ===========
             // 각 산타들은 루돌프와 가까운 방향으로 한 칸 이동
             
@@ -137,7 +156,7 @@ public class Main {
                     int nextR = santa.r+dr[j];
                     int nextC = santa.c+dc[j];
 
-                    if(!inRange(nextR, nextC) || board[nextR][nextC] > 0 ) continue;
+                    if(!inRange(nextR, nextC) || map[nextR][nextC] > 0 ) continue;
 
                     int dist = rudolf.getDistance(new Point(nextR, nextC));
 
@@ -168,28 +187,37 @@ public class Main {
                             lastC -= dc[moveDir];
                         }
 
-                        While(firstR-1 != lastR || firstC-1 != lastC){
+                        while(firstR-1 != lastR || firstC-1 != lastC){
                             int beforeR = lastR + dr[moveDir];
                             int beforeC = lastC + dc[moveDir];
                             
-                            if(inRange(beforeR,beforeC)){
-                                int idx = map[beforeR][beforeC];
+                            if(!inRange(beforeR,beforeC)) break;
+                            int idx = map[beforeR][beforeC];
 
-                                if(inRange(lastR, lastC)){
-                                    map[lastR][lastC] = map[beforeR][beforeC];
-                                    santas.put(idx, new Point(lastR,lastC));
-                                }else{
-                                    isDead[idx] = true;
-                                } 
-                            }
+                            if(inRange(lastR, lastC)){
+                                map[lastR][lastC] = map[beforeR][beforeC];
+                                santas.put(idx, new Point(lastR,lastC));
+                            }else{
+                                isDead[idx] = true;
+                            } 
+                            
 
                             lastR = beforeR;
-                            lastsC = beforeC;
+                            lastC = beforeC;
                         }
 
                         // 포인트 획득
                         point[i] += D;
-                       
+                        
+                        if(inRange(firstR, firstC)){
+         
+                            map[firstR][firstC] = closestIdx;
+                            santas.put(closestIdx, new Point(firstR,firstC));
+                        }else{
+                    
+                            isDead[closestIdx] = true;
+                        } 
+                
 
                     }else{ // 충돌하지 않은 경우
                         map[santa.r][santa.c] = i;
@@ -197,24 +225,27 @@ public class Main {
                     }
                    
                 }
-              
+                
+   
 
             }
 
             for(int i=1; i<=P; i++){
-                if(!isDead[i]) points[i]++;
+                if(!isDead[i]) point[i]++;
             }
+            
+           
 
         }
 
         for(int i=1; i<=P; i++){
-            System.out.println(points[i] + " ");
+            System.out.print(point[i] + " ");
         }        
     }
 
 
     static boolean inRange(int x, int y) {
-        return 1 <= x && x <= n && 1 <= y && y <= n;
+        return 1 <= x && x <= N && 1 <= y && y <= N;
     }
 
 
@@ -232,11 +263,11 @@ public class Main {
         @Override
         public int compareTo(Tuple o){
             if(this.d != o.d){
-                return Integer.comare(this.d, o.d);
+                return Integer.compare(this.d, o.d);
             }else if(this.r != o.r){
-                return Integer.compare(this.r, o.r);
+                return Integer.compare(o.r, this.r);
             }else{
-                return Integer.compare(this.c, o.c);
+                return Integer.compare(o.c,this.c);
             }
         }
     }
@@ -252,7 +283,8 @@ public class Main {
         }
 
         public int getDistance(Point p){
-            return Math.pow(this.r-p.r, 2) + Math.pow(this.c-p.c, 2);
+            return (this.r - p.r)* (this.r - p.r) + (this.c - p.c)* (this.c - p.c); 
         }
     }
+
 }
