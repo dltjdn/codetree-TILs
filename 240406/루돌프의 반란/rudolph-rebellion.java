@@ -182,7 +182,10 @@ public class Main {
                         stun[i] = t+1; // 기절
 
                         // 이동한 곳에 산타 있을 때 "상호작용"
-                        while(inRange(lastR,lastC) && map[lastR][lastC] > 0 ) {
+                        if (D == 1) {
+	                            point[i] += D;
+	                    } else {
+                               while(inRange(lastR,lastC) && map[lastR][lastC] > 0 ) {
                             lastR -= dr[moveDir];
                             lastC -= dc[moveDir];
                         }
@@ -218,6 +221,9 @@ public class Main {
                             isDead[i] = true;
                         } 
                 
+                            
+                        }
+                     
 
                     }else{ // 충돌하지 않은 경우
                         map[santa.r][santa.c] = i;
