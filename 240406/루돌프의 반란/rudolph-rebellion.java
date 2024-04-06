@@ -187,7 +187,7 @@ public class Main {
                             lastC -= dc[moveDir];
                         }
 
-                        while(firstR-1 != lastR || firstC-1 != lastC){
+                        while(firstR != lastR || firstC != lastC){
                             int beforeR = lastR + dr[moveDir];
                             int beforeC = lastC + dc[moveDir];
                             
@@ -211,11 +211,11 @@ public class Main {
                         
                         if(inRange(firstR, firstC)){
          
-                            map[firstR][firstC] = closestIdx;
-                            santas.put(closestIdx, new Point(firstR,firstC));
+                            map[firstR][firstC] = i;
+                            santas.put(i, new Point(firstR,firstC));
                         }else{
                     
-                            isDead[closestIdx] = true;
+                            isDead[i] = true;
                         } 
                 
 
