@@ -148,7 +148,7 @@ public class Main {
                 if(isDead[i] || stun[i] >= t ) continue;
 
                 Point santa = santas.get(i);
-                int minDist = Integer.MAX_VALUE;
+                int minDist = rudolf.getDistance(santa);
                 int moveDir = -1;
 
                 // 4방향 중 가장 가까운 곳 구하기
