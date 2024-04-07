@@ -16,11 +16,13 @@ public class Main {
 	    Point[] markets = new Point[m+1];
 	    Point[] starts = new Point[m+1];
 	    List<Point> baseCamps = new ArrayList<>();
+	 
 	    
 	    boolean[] isReach = new boolean[m+1];
 	    int[][] map = new int[n+1][n+1];
 	   
 		
+	    int baseCampLen = 0;
 		for(int i=1; i<=n; i++) {
 			String[] row = bf.readLine().split(" ");
 			for(int j=1; j<=n; j++) {
@@ -104,9 +106,13 @@ public class Main {
 				int closestDist = n+n;
 				int closestR = n;
 				int closestC = n;
+	
+				Point p = markets[time];
 				
-				for(Point baseCamp : baseCamps) {
-					Point p = markets[time];
+				for(Point baseCamp : baseCamps){
+					//System.out.println("!!"+baseCamp);
+					if(map[baseCamp.r][baseCamp.c] == -1) continue;
+					
 					int dist = p.getDist(baseCamp.r, baseCamp.c);
 					
 					if(dist < closestDist) {
