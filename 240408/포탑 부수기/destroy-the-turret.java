@@ -54,6 +54,7 @@ public class Main {
 		
 			map[attackR][attackC] = map[attackR][attackC] + n + m;
 			isAttack[attackR][attackC] = true;
+			time[attackR][attackC] = t;
 			
 			//System.out.println("공격자: "+ attackR + " "+ attackC + " "+ map[attackR][attackC]);
 			
