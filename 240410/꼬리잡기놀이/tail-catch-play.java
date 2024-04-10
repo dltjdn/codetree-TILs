@@ -53,7 +53,7 @@ public class Main {
 		
 		
 		for(int t=1; t<=k; t++) {
-			System.out.println(t + "라운드======");
+			//System.out.println(t + "라운드======");
 			
 			// 1. 머리사람 따라서 한칸 이동
 			moveAll();
@@ -68,14 +68,14 @@ public class Main {
 //
 //			}
 			
-			System.out.println("-----map----");
-			for(int i=1; i<=n; i++) {
-				for(int j=1; j<=n; j++) {
-					System.out.print(map[i][j] + " ");
-				}
-				System.out.println();
-			}
-			System.out.println();
+//			System.out.println("-----map----");
+//			for(int i=1; i<=n; i++) {
+//				for(int j=1; j<=n; j++) {
+//					System.out.print(map[i][j] + " ");
+//				}
+//				System.out.println();
+//			}
+//			System.out.println();
 			
 			// 2. 공 던지기 + 점수 얻기 + 머리 꼬리 바꾸기
 			throwBall(t);
@@ -91,16 +91,16 @@ public class Main {
 //
 //			}
 			
-			System.out.println("---map2----");
-			for(int i=1; i<=n; i++) {
-				for(int j=1; j<=n; j++) {
-					System.out.print(map[i][j] + " ");
-				}
-				System.out.println();
-			}
+//			System.out.println("---map2----");
+//			for(int i=1; i<=n; i++) {
+//				for(int j=1; j<=n; j++) {
+//					System.out.print(map[i][j] + " ");
+//				}
+//				System.out.println();
+//			}
 			
 			
-			System.out.println(point);
+			//System.out.println(point);
 
 		}
 		
