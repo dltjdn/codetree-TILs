@@ -19,8 +19,8 @@ public class Main {
 		m = Integer.parseInt(line[0]); // 몬스터 마리수
 		t = Integer.parseInt(line[1]); // 턴 수
 		monstersLength = m;
-		monsters = new Monster[1000010];
-		isDead = new int[1000010]; // 죽은 턴 기록 : 4 > turn  
+		monsters = new Monster[1000001];
+		isDead = new int[1000001]; // 죽은 턴 기록 : 4 > turn  
 		Arrays.fill(isDead, -1); // -1이면 죽지 않은 것!
 		deadMap = new int[5][5];
 		
@@ -65,7 +65,7 @@ public class Main {
 			// 4. 몬스터 시체 소멸
 			// 시체 될 때 turn 저장하면자동
 			// 2턴 의미 !!!! 확인!!!!!!
-			Monster[] newArr = new Monster[1000010];
+			Monster[] newArr = new Monster[1000001];
 			int cnt = 1;
 			for(int i=1; i<=monstersLength; i++) {
 				if(isDead[i] == -1) {
@@ -75,7 +75,7 @@ public class Main {
 
 			monsters = newArr;
 			monstersLength = cnt-1;
-			isDead = new int[1000010];
+			isDead = new int[1000001];
 			Arrays.fill(isDead, -1);
 		
 			
@@ -147,7 +147,7 @@ public class Main {
 					//visited.put(next3, true);
 					
 					int cnt = 0;
-					boolean[] isTempDead = new boolean[1000010];
+					boolean[] isTempDead = new boolean[1000001];
 					for(Point direction : directions) {
 						for(int j=1; j<= monstersLength; j++) {
 							if(isDead[j] == -1 && (monsters[j].p.r == direction.r && monsters[j].p.c == direction.c) && !isTempDead[j]) {
