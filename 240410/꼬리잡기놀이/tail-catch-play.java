@@ -53,7 +53,7 @@ public class Main {
 		
 		
 		for(int t=1; t<=k; t++) {
-			//System.out.println(t + "라운드======");
+			System.out.println(t + "라운드======");
 			
 			// 1. 머리사람 따라서 한칸 이동
 			moveAll();
@@ -68,14 +68,14 @@ public class Main {
 //
 //			}
 			
-//			System.out.println("-----map----");
-//			for(int i=1; i<=n; i++) {
-//				for(int j=1; j<=n; j++) {
-//					System.out.print(map[i][j] + " ");
-//				}
-//				System.out.println();
-//			}
-//			System.out.println();
+			System.out.println("-----map----");
+			for(int i=1; i<=n; i++) {
+				for(int j=1; j<=n; j++) {
+					System.out.print(map[i][j] + " ");
+				}
+				System.out.println();
+			}
+			System.out.println();
 			
 			// 2. 공 던지기 + 점수 얻기 + 머리 꼬리 바꾸기
 			throwBall(t);
@@ -91,16 +91,16 @@ public class Main {
 //
 //			}
 			
-//			System.out.println("---map2----");
-//			for(int i=1; i<=n; i++) {
-//				for(int j=1; j<=n; j++) {
-//					System.out.print(map[i][j] + " ");
-//				}
-//				System.out.println();
-//			}
-//			
+			System.out.println("---map2----");
+			for(int i=1; i<=n; i++) {
+				for(int j=1; j<=n; j++) {
+					System.out.print(map[i][j] + " ");
+				}
+				System.out.println();
+			}
 			
-			//System.out.println(point);
+			
+			System.out.println(point);
 
 		}
 		
@@ -110,7 +110,7 @@ public class Main {
 	}
 	
 	public static void throwBall(int t) {
-		int temp = t % (4 * n + 1);
+		int temp = t % (4*n+1);
 		
 		
 		int minTeam = -1;
@@ -139,27 +139,30 @@ public class Main {
 			//System.out.println("minCol: " + minCol + " minTeam : " + minTeam + " minOrder : " + minOrder);
 			
 		}else if(temp <= 2*n ){ 
-			int temp2 = temp % n;
+			
+			int temp2 = temp % (n+1) + 1;
+			
 			int maxRow = Integer.MIN_VALUE;
 			
 			for(int i=1; i<=m; i++) {
-				for(int j = 1; j<=v[i].size(); j++) {
+				for(int j = 0; j<tails[i]; j++) {
 					Point p = v[i].get(j);
 					if(p.c == temp2 && p.r > maxRow) {
-						maxRow = p.c;
+						maxRow = p.r;
 						minTeam = i;
 						minOrder = j;			
 					}	
 				}
 			}			
 		}else if(temp <= 3*n ){	
-			int temp2 = temp % (2*n);
+			int temp2 = temp % (2*n+1) + 1;
+			int temp3 = n - temp2 + 1;
 			int maxCol = Integer.MIN_VALUE;
 			
 			for(int i=1; i<=m; i++) {
-				for(int j = 0; j<v[i].size(); j++) {
+				for(int j = 0; j<tails[i]; j++){
 					Point p = v[i].get(j);
-					if(p.r == temp2 && p.c > maxCol) {
+					if(p.r == temp3 && p.c > maxCol) {
 						maxCol = p.c;
 						minTeam = i;
 						minOrder = j;			
@@ -168,14 +171,15 @@ public class Main {
 				}
 			}	
 		}else {
-			int temp2 = temp % (3*n);
+			int temp2 = temp % (3*n+1) + 1;
+			int temp3 = n - temp2 + 1;
 			int minRow = Integer.MAX_VALUE;
 			
 			for(int i=1; i<=m; i++) {
-				for(int j = 0; j<v[i].size(); j++) {
+				for(int j = 0; j<tails[i]; j++) {
 					Point p = v[i].get(j);
-					if(p.c == temp2 && p.r < minRow) {
-						minRow = p.c;
+					if(p.c == temp3 && p.r < minRow) {
+						minRow = p.r;
 						minTeam = i;
 						minOrder = j;			
 					}
