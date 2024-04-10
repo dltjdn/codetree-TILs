@@ -19,8 +19,8 @@ public class Main {
 		m = Integer.parseInt(line[0]); // 몬스터 마리수
 		t = Integer.parseInt(line[1]); // 턴 수
 		monstersLength = m;
-		monsters = new Monster[2000000];
-		isDead = new int[20000000]; // 죽은 턴 기록 : 4 > turn  
+		monsters = new Monster[1001000];
+		isDead = new int[1001000]; // 죽은 턴 기록 : 4 > turn  
 		Arrays.fill(isDead, -1); // -1이면 죽지 않은 것!
 		deadMap = new int[5][5];
 		
