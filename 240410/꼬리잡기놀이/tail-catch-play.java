@@ -90,17 +90,18 @@ public class Main {
 //				System.out.println();
 //
 //			}
-			
+//			
 //			System.out.println("---map2----");
-//			for(int i=1; i<=n; i++) {
-//				for(int j=1; j<=n; j++) {
-//					System.out.print(map[i][j] + " ");
+//			if(t==57 || t==58) {
+//				for(int i=1; i<=n; i++) {
+//					for(int j=1; j<=n; j++) {
+//						System.out.print(map[i][j] + " ");
+//					}
+//					System.out.println();
 //				}
-//				System.out.println();
 //			}
 			
-			
-			//System.out.println(point);
+			//System.out.println(t+"회 " +point);
 
 		}
 		
@@ -110,18 +111,16 @@ public class Main {
 	}
 	
 	public static void throwBall(int t) {
-		int temp = t % (4*n+1);
-		
-		
+		int temp = (t -1) % (4*n) + 1;
+	
+
 		int minTeam = -1;
 		int minOrder = -1;
 		
 		
 		if(temp <= n) { // -> 행이temp
 			int minCol = Integer.MAX_VALUE;
-			
-			//System.out.println("?? " + temp);
-			
+				
 			for(int i=1; i<=m; i++) {
 				for(int j = 0; j<tails[i]; j++) {
 					Point p = v[i].get(j);
@@ -140,14 +139,13 @@ public class Main {
 			
 		}else if(temp <= 2*n ){ 
 			
-			int temp2 = temp % (n+1) + 1;
-			
+			temp = temp % (n+1) + 1;
 			int maxRow = Integer.MIN_VALUE;
 			
 			for(int i=1; i<=m; i++) {
 				for(int j = 0; j<tails[i]; j++) {
 					Point p = v[i].get(j);
-					if(p.c == temp2 && p.r > maxRow) {
+					if(p.c == temp && p.r > maxRow) {
 						maxRow = p.r;
 						minTeam = i;
 						minOrder = j;			
@@ -155,14 +153,16 @@ public class Main {
 				}
 			}			
 		}else if(temp <= 3*n ){	
-			int temp2 = temp % (2*n+1) + 1;
-			int temp3 = n - temp2 + 1;
+			temp = temp % (2*n+1) + 1;
+			temp = n - temp + 1;
+			
+	
 			int maxCol = Integer.MIN_VALUE;
 			
 			for(int i=1; i<=m; i++) {
 				for(int j = 0; j<tails[i]; j++){
 					Point p = v[i].get(j);
-					if(p.r == temp3 && p.c > maxCol) {
+					if(p.r == temp && p.c > maxCol) {
 						maxCol = p.c;
 						minTeam = i;
 						minOrder = j;			
@@ -171,14 +171,14 @@ public class Main {
 				}
 			}	
 		}else {
-			int temp2 = temp % (3*n+1) + 1;
-			int temp3 = n - temp2 + 1;
+			temp = temp % (3*n+1) + 1;
+			temp = n - temp + 1;
 			int minRow = Integer.MAX_VALUE;
 			
 			for(int i=1; i<=m; i++) {
 				for(int j = 0; j<tails[i]; j++) {
 					Point p = v[i].get(j);
-					if(p.c == temp3 && p.r < minRow) {
+					if(p.c == temp && p.r < minRow) {
 						minRow = p.r;
 						minTeam = i;
 						minOrder = j;			
