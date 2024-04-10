@@ -191,7 +191,7 @@ public class Main {
 				Point next = new Point(nextR, nextC);
 				
 				if(next.inRange() && !(next.r == packman.r && next.c == packman.c)
-						&& deadMap[next.r][next.c] <= turn) { //2에 죽음 isDead= 4 4>3  4>4	
+						&& deadMap[next.r][next.c] < turn) { //2에 죽음 isDead= 4 4>3  4>4	
 					break;
 				}
 
