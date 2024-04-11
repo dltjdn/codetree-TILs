@@ -140,69 +140,28 @@ public class Main {
 	}
 
 	private static void gravity() {
-		List<Integer> stoneRows = new ArrayList<>();
-		for(int c=1; c<=n; c++) { // 1열 -> -> n열
-			
-			// stone에 돈 행 저
-			for(int r=1; r<=n; r++) {
-				if(map[r][c] == -1) { 
-					stoneRows.add(r);
-				}
-			}
-			
-
-			if(stoneRows.size() == 0) { // 돌 없을 때
-				for(int r=n-1; r>=1; r--) {
-					if(map[r][c] != -2) { 
-						while(true) {
-							if(r >= n || map[r+1][c] >= 0) break;
-							map[r+1][c] = map[r][c];
-							map[r][c] = -2;
-							r++;
-						}
-					}
-				}
-			}else {
-				// 가장 아래 돌 ~ 바닥 이동
-				int last1 = n+1;
-				int start1 = stoneRows.get(stoneRows.size()-1)+1;
-				
-				for(int r=last1-2; r>=start1; r--) {
-					if(map[r][c] != -2) { 
-						int curR = r;
-						while(true) {
-							if(curR >= last1-1 || map[curR+1][c] >= 0) break;
-							
-							map[curR+1][c] = map[curR][c];
-							map[curR][c] = -2;
-							curR++;
-						}
-					}
-				}
-				
-				
-				// 천장 ~ 가장 아래 돌 이동
-				for(int i=stoneRows.size()-1; i>=0; i--) {
-					int last = stoneRows.get(i); // 가장 아래
-					int start = (i==0)? 1 : stoneRows.get(i-1)+1;
-					
-					for(int r=last-2; r>=start; r--) {
-						if(map[r][c] != -2) { 
-							int curR = r;
-							while(true) {
-								if(curR >= last-1 || map[curR+1][c] >= 0) break;
-								
-								map[curR+1][c] = map[curR][c];
-								map[curR][c] = -2;
-								curR++;
-							}
-						}
-					}
-				}
-
-			}	
-			
+		int[][] temp = new int[n+1][n+1];
+		
+		for(int i=1; i<=n; i++) {
+			Arrays.fill(temp[i], -2);
 		}
+		
+	
+		for(int c=1; c<=n; c++) { // 1열 -> -> n열
+			int lastIdx = n;
+			for(int r=n; r>=1; r--) {
+				if(map[r][c] == -2 ) continue;
+				
+				if(map[r][c] == -1) lastIdx = r;
+				
+				temp[lastIdx--][c] = map[r][c];
+				
+			}
+		}
+		
+		map = temp;
+			
+		
 	}
 	
 	public static Vertex getKijun(Set<Point> bombs) {
