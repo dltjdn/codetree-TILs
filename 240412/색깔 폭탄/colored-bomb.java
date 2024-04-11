@@ -190,7 +190,7 @@ public class Main {
 						if(map[r][c] != -2) { 
 							int curR = r;
 							while(true) {
-								if(curR >= last-2 || map[curR+1][c] >= 0) break;
+								if(curR >= last-1 || map[curR+1][c] >= 0) break;
 								
 								map[curR+1][c] = map[curR][c];
 								map[curR][c] = -2;
