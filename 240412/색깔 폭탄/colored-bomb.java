@@ -30,7 +30,6 @@ public class Main {
 		
 		outer: while(bombCnt > 0) {
 			
-			
 			// 1. 현재 겪자에서 크기가 가장 큰 폭탄 묶음 찾기
 			// 크기 가장 큰 거 두 개 이상이면 우선순위에 따라 선택
 			Vertex best = new Vertex(0, n*n, 1, n);
@@ -51,24 +50,17 @@ public class Main {
 					if(cur.compareTo(best) < 0) {
 						best = cur;
 						select = bombs;
-					}
-						
+					}	
 			
 				}
 					
 			}
-			
-//			for(Point s : select) {
-//				System.out.println("!!!!!! " + s.r + " "+ s.c);
-//			}
-			
-			
-			//if(best.bombSize == 0) break outer;
 
 			
 			// 2. 선택된 폭탄 제거 -> -2
 			// 점수 얻, bombCnt 줄이
 			if(select.isEmpty()) break outer;
+			
 			for(Point s: select) {
 				map[s.r][s.c] = -2;
 			}
@@ -76,26 +68,11 @@ public class Main {
 			point += (select.size() * select.size());
 			bombCnt -= select.size();
 			
-//			System.out.println("2이후 ======");
-//			for(int i=1; i<=n; i++) {
-//				for(int j =1; j<=n; j++) {
-//					System.out.print(map[i][j] + " ");
-//				}
-//				System.out.println();
-//			}
-//			
-			
+	
 			// 3. 중력 작용 ( 돌에 걸림 )
 			gravity();
 			
-//			System.out.println("3이후 ======");
-//			for(int i=1; i<=n; i++) {
-//				for(int j =1; j<=n; j++) {
-//					System.out.print(map[i][j] + " ");
-//				}
-//				System.out.println();
-//			}
-			
+
 			// 4. 시계방향 270도 회전
 			int[][] rotate = new int[n+1][n+1];
 			
@@ -109,28 +86,17 @@ public class Main {
 				}
 			}
 			
-			map = rotate;
+
+			for(int i=1; i<=n; i++) {
+				for(int j=1; j<=n; j++) {
+					map[i][j] = rotate[i][j];
+				}
+			}
 			
-//			System.out.println("4 이후======");
-//			for(int i=1; i<=n; i++) {
-//				for(int j =1; j<=n; j++) {
-//					System.out.print(map[i][j] + " ");
-//				}
-//				System.out.println();
-//			}
 			
 			// 5. 중력작용
 			gravity();
 			
-//			System.out.println("5 이후======");
-//			for(int i=1; i<=n; i++) {
-//				for(int j =1; j<=n; j++) {
-//					System.out.print(map[i][j] + " ");
-//				}
-//				System.out.println();
-//			}
-//			
-//			System.out.println(point);
 			
 		}
 		
@@ -159,8 +125,11 @@ public class Main {
 			}
 		}
 		
-		map = temp;
-			
+		for(int i=1; i<=n; i++) {
+			for(int j=1; j<=n; j++) {
+				map[i][j] = temp[i][j];
+			}
+		}
 		
 	}
 	
@@ -233,8 +202,8 @@ public class Main {
 				return Integer.compare(v.bombSize, this.bombSize);
 			}else if(this.redCnt != v.redCnt) {
 				return Integer.compare(this.redCnt, v.redCnt);
-			}else if(this.r != this.c) {
-				return Integer.compare(v.r, this.c);
+			}else if(this.r != v.r) {
+				return Integer.compare(v.r, this.r);
 			}else {
 				return Integer.compare(this.c, v.c);
 			}
@@ -258,8 +227,8 @@ public class Main {
 		
 		@Override
 		public int compareTo(Point p) {
-			if(this.r != this.c) {
-				return Integer.compare(p.r, this.c);
+			if(this.r != p.r) {
+				return Integer.compare(p.r, this.r);
 			}else {
 				return Integer.compare(this.c, p.c);
 			}
