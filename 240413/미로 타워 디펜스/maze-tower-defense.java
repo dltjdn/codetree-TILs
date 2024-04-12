@@ -67,7 +67,7 @@ public class Main {
 			//   &  2. 몬스터 앞으로 이동 ) - 4번이상 몬스터 없을때까지
 			while(true) {
 				if(!bfs()) break;
-//				
+				
 //				System.out.println("3번 전  =============");
 //				for(int i=0; i<n; i++) {
 //					for(int j=0; j<n; j++) {
@@ -76,9 +76,9 @@ public class Main {
 //					System.out.println();
 //				}
 //				System.out.println("3번 Point : " + point);
-				
-		
-				
+//				
+//		
+//				
 				move();
 				
 //				System.out.println("3번 후 =============");
@@ -89,7 +89,7 @@ public class Main {
 //					System.out.println();
 //				}
 //				System.out.println("3번 Point : " + point);
-//				
+////				
 				
 			}
 		
@@ -104,8 +104,9 @@ public class Main {
 //				}
 //				System.out.println();
 //			}
-		
 			
+		
+			//System.out.println(point);
 		}
 		
 		System.out.println(point);
@@ -259,8 +260,6 @@ public class Main {
 			sr += dr[d1];
 			sc += dc[d1];
 			
-			if( map[sr][sc] == 0) break;
-			
 			if(!temps.isEmpty() && map[sr][sc] != map[temps.get(temps.size()-1).r][temps.get(temps.size()-1).c]) {
 				if(temps.size() >= 4) {
 					flag= true;
@@ -274,6 +273,8 @@ public class Main {
 			}
 		
 			temps.add(new Point(sr, sc));
+			
+			if( map[sr][sc] == 0) break;
 		}
 		
 		
