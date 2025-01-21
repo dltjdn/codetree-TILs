@@ -6,10 +6,11 @@ public class Main {
     public static int vertexCnt = 0;
 
     public static void dfs(int vertex){
+        visited[vertex] = true;
+
         for(int i=0; i<graph[vertex].size(); i++){
             int curV = graph[vertex].get(i);
             if(!visited[curV]){
-                visited[curV] = true;
                 vertexCnt++;
                 dfs(curV);
             }
@@ -35,7 +36,6 @@ public class Main {
             graph[v2].add(v1);
         }
 
-        visited[1] = true;
         dfs(1);
 
         System.out.println(vertexCnt);
