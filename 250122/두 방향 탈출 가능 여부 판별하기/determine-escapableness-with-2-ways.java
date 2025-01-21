@@ -8,11 +8,12 @@ public class Main {
         int[] dr = new int[]{1,0};
         int[] dc = new int[]{0,1};
 
+        visited[r][c] = 1;
+
         for(int i=0; i<2; i++){
             int newR = r + dr[i];
             int newC = c + dc[i];
             if(canGo(newR, newC)){
-                visited[newR][newC] = 1;
                 dfs(newR, newC);
             }
         }
@@ -43,7 +44,6 @@ public class Main {
             }
         }
 
-        visited[0][0] = 1;
         dfs(0,0);
 
         System.out.println(visited[n-1][m-1]);
