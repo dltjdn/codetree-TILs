@@ -2,12 +2,11 @@ import java.util.*;
 
 public class Main {
     public static int n;
-    public static int[] dp;
+    public static int[] dp = new int[45];
     public static void main(String[] args) {
         // Please write your code here.
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        dp = new int[n+1];
 
         dp[1] = 1;
         dp[2] = 1;
