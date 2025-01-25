@@ -17,20 +17,21 @@ public class Main {
 
         init();
 
-        for(int i=0; i<=m; i++){
+        for(int i=1; i<=m; i++){ // ** 1부터 시작
             for(int j=0; j<n; j++){
                 if(i>=coins[j]){
                     if(dp[i-coins[j]] == Integer.MAX_VALUE) continue;
 
+                    // dp[i] : 지금까지 선택한 동전의 합이 i일때, 가능한 최소 동전 개수
                     dp[i] = Math.min(dp[i-coins[j]]+1, dp[i]);
-                    //System.out.println(i+" "+dp[i]);
                 }
                
             }
         }
 
-        if(dp[m] == Integer.MAX_VALUE) System.out.println(-1);
-        else System.out.println(dp[m]);
+        int ans = dp[m];
+        if(ans == Integer.MAX_VALUE) ans = -1;
+        System.out.println(ans);
     }
 
     public static void init(){
