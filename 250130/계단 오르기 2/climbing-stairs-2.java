@@ -16,15 +16,16 @@ public class Main {
 
         init();
 
-        for(int i=1; i<=n; i++){
+        for(int i=3; i<=n; i++){
             for(int j=0; j<=3; j++){
-                if(j>=1){
+                if(j>=1 &&  dp[i-1][j-1] != 0){
                     dp[i][j] = Math.max(dp[i][j], dp[i-1][j-1] + a[i]);
                 }
      
-                if(i>=2){
+                if(dp[i-2][j] != 0){
                     dp[i][j] = Math.max(dp[i][j], dp[i-2][j] + a[i]);
                 }
+                
             }
         }
 
@@ -36,10 +37,10 @@ public class Main {
     }
 
     public static void init(){
-        for(int i=0; i<=n; i++){
-            Arrays.fill(dp[i], Integer.MIN_VALUE);
-        }
 
-        dp[0][0] = 0;
+        dp[1][1] = a[1];
+        
+        dp[2][0] = a[2];
+        dp[2][2] = a[1] + a[2];
     }
 }
