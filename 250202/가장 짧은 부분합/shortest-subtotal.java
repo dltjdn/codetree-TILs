@@ -23,7 +23,9 @@ public class Main {
                 j++;
             }
 
+            // 최대한 이동했는데도 sum이 s가 되지 못함
             if(sum < s){
+                // ans = -1 (X) -> 기존 ans도 초기화됨
                 break;
             }
 
