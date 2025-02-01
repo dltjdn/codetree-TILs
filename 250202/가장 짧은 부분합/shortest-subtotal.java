@@ -1,13 +1,14 @@
 import java.util.*;
 public class Main {
     //** 투포인터 : 2개의 포인터가 한 방향으로만 계속 전진
-    public static int n,s;
+    public static int n;
+    public static long s;
     public static int[] arr;
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        s = sc.nextInt();
+        s = sc.nextLong();
         arr = new int[n];
 
         for(int i=0; i<n; i++){
