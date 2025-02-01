@@ -15,7 +15,7 @@ public class Main {
         }
 
         int j = 0;
-        int sum = 0;
+        long sum = 0;
         int ans = Integer.MAX_VALUE;
         for(int i=0; i<n; i++){
             while(j < n && sum + arr[j] < s){
@@ -25,7 +25,6 @@ public class Main {
 
             if(i == 0 && j == n && sum + arr[j] < s){
                 ans = -1;
-                break;
             }
 
             ans = Math.min(j-i+1, ans);
