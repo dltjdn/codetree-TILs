@@ -12,15 +12,17 @@ public class Main {
         }
 
         int sum = 0;
+        int ans = Integer.MIN_VALUE;
         for(int i=0; i<n; i++){
             if(sum < 0){
                 sum = arr[i];
             }else{
                 sum += arr[i];
             }
+            ans = Math.max(ans, sum);
         }
 
-        System.out.println(sum);
+        System.out.println(ans);
 
     }
 }
