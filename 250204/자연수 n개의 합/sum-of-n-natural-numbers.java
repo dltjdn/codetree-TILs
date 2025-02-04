@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         // Please write your code here.
         Scanner sc = new Scanner(System.in);
-        s = sc.nextInt();
+        s = sc.nextLong();
 
         long left = 1;
         long right = (int)1e9; // 
