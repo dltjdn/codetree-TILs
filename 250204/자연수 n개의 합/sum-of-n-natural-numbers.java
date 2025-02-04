@@ -7,7 +7,8 @@ public class Main {
         s = sc.nextLong();
 
         long left = 1;
-        long right = (int)1e18;
+        long right = (int)1e18; 
+        long maxNum = 1;
         while(left <= right){
             long mid = (left + right) / 2;
             
