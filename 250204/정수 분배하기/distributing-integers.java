@@ -12,7 +12,7 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        int left = 1;
+        int left = 0;
         int right = 100000;
         int ans = Integer.MIN_VALUE;
         while(left <= right){
