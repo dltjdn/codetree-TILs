@@ -12,9 +12,9 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        int left = 0;
+        int left = 1;
         int right = 100000;
-        int ans = Integer.MIN_VALUE;
+        int ans = 0;
         while(left <= right){
             int mid = (left+right)/2;
 
@@ -33,13 +33,7 @@ public class Main {
     public static boolean isPossible(int maxNum){
         int cnt = 0;
         for(int i=0; i<n; i++){
-            if(arr[i] < maxNum) return false;
-
             cnt += arr[i]/maxNum;
-
-            if(cnt >= m){
-                return true;
-            }
         }
 
         return cnt >= m;
