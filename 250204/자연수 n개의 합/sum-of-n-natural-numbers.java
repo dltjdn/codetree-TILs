@@ -7,7 +7,7 @@ public class Main {
         s = sc.nextLong();
 
         long left = 1;
-        long right = (int)1e9; 
+        long right = (int)1e10; // ** 최댓값은 넉넉잡아 
         long maxNum = 1;
         while(left <= right){
             long mid = (left + right) / 2;
