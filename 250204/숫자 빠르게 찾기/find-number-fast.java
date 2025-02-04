@@ -22,7 +22,7 @@ public class Main {
             while(left <= right){
                 int mid = (left+right)/2;
                 if(arr[mid] == target){
-                    idx = mid+1;
+                    idx = mid+1; // 몇번째 수인지 -> +1 해야함
                     break;
                 }
 
