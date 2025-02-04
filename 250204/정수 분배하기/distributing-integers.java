@@ -12,10 +12,16 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        // 1개의 정수를 분배해 같은 크기의 정수k를 10개
+       
         int left = 1;
         int right = 100000;
-        int ans = 0; // ** 초기값 0 설정 매우 중요 (n: 1, m: 10, arr: 1)
+      
+        // ** 초기값 0 설정 매우 중요 (n: 1, m: 10, arr: 1)
+        // 1개의 정수를 분배해 같은 크기의 정수k를 10개
+        // 초기값 0이여야 가능 
+        // (초기값 0 안하고) left=0 이면 나누기 오류 생김
+        int ans = 0;
+
         while(left <= right){
             int mid = (left+right)/2;
 
