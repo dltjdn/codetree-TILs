@@ -59,19 +59,17 @@ public class Main {
 
         System.out.println(dist[a]);
 
-        int x = a;
+        int x = a; //시작점
         List<Integer> vertex = new ArrayList<>();
         vertex.add(x);
 
         while(x != b){
-            graph[x].sort(Comparator.comparingInt(o -> o.idx));
+            // ** 작은 번호의 간선을 먼저 선택하도록 정렬
+            graph[x].sort((o1,o2) -> Integer.compare(o1.idx, o2.idx));
 
             for(Node neighbor: graph[x]){
-                int i = neighbor.idx;
-                int d = neighbor.dist;
-
-                if(dist[i] + d == dist[x]){
-                    x = i;
+                if(dist[neighbor.idx] + neighbor.dist == dist[x]){ // ** 작은 번호가 일치하면 break
+                    x = neighbor.idx;
                     vertex.add(x);
                     break;
                 }
