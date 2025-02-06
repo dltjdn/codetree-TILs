@@ -34,7 +34,7 @@ public class Main {
         b = sc.nextInt();
 
 
-        // ** 도착점 b에서 시작
+        // ** 도착점 b에서 시작 -> 가장 중요, a에서 시작 X
         dist[b] = 0;
         pq.add(new Node(b,0));
 
