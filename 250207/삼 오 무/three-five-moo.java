@@ -6,11 +6,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
 
-        int left = 1;
-        int right = Integer.MAX_VALUE;
-        int minNum = Integer.MAX_VALUE;
+        long left = 1;
+        long right = Integer.MAX_VALUE;
+        long minNum = Integer.MAX_VALUE;
         while(left <= right){
-            int mid = (left + right) / 2;
+            long mid = (left + right) / 2;
 
             if(cntNum(mid) >= n){
                 right = mid - 1;
@@ -24,8 +24,8 @@ public class Main {
         
     }
 
-    public static int cntNum(int num){
-        int moo = num/3 + num/5 - num/15;
+    public static long cntNum(long num){
+        long moo = num/3 + num/5 - num/15;
 
         return num-moo;
     }
