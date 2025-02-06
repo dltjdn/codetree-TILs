@@ -23,8 +23,7 @@ public class Main {
             int y = sc.nextInt();
             int d = sc.nextInt();
 
-            graph[x].add(new Node(y, d));
-            graph[y].add(new Node(x, d));
+            graph[y].add(new Node(x, d)); // ** 방향 그래프, 간선 뒤집어서
         }
 
         dist[n] = 0;
@@ -41,7 +40,7 @@ public class Main {
                 int targetIdx = graph[minIdx].get(i).idx;
                 int targetDist = graph[minIdx].get(i).dist;
 
-                int newDist = targetDist + dist[minIdx];
+                int newDist = dist[minIdx] + targetDist;
                 if(dist[targetIdx] > newDist){
                     dist[targetIdx] = newDist;
                     pq.add(new Node(targetIdx, newDist));
@@ -50,8 +49,8 @@ public class Main {
             }
         }
 
-        int ans = Integer.MIN_VALUE;
-        for(int i=1; i<=n; i++){
+        int ans = 0;
+        for(int i=1; i<n; i++){
             ans = Math.max(ans, dist[i]);
         }
         System.out.println(ans);
