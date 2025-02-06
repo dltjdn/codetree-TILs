@@ -15,6 +15,7 @@ public class Main {
         path = new int[n+1];
         graph = new ArrayList[n+1];
 
+        // ** 초기화 필수
         for(int i=1; i<=n; i++){
             graph[i] = new ArrayList<>();
         }
@@ -51,7 +52,7 @@ public class Main {
                     dist[targetIdx] = newDist;
                     pq.add(new Node(targetIdx, newDist));
 
-                    path[targetIdx] = minIdx;
+                    path[targetIdx] = minIdx; // ** 기록
                 }
             }
         }
@@ -83,6 +84,6 @@ class Node implements Comparable<Node>{
 
     @Override
     public int compareTo(Node n){
-        return Integer.compare(this.idx, n.dist);
+        return Integer.compare(this.dist, n.dist);
     }
 }
