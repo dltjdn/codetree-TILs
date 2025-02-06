@@ -15,7 +15,7 @@ public class Main {
         for(int i=1; i<=n; i++){
             graph[i] = new ArrayList<>();
         }
-        
+
         Arrays.fill(dist, (int)1e9);
 
         for(int i=0; i<m; i++){
@@ -51,7 +51,7 @@ public class Main {
         }
 
         int ans = Integer.MIN_VALUE;
-        for(int i=1; i<n; i++){
+        for(int i=1; i<=n; i++){
             ans = Math.max(ans, dist[i]);
         }
         System.out.println(ans);
