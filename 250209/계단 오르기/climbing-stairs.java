@@ -16,7 +16,7 @@ public class Main {
         dp[2] = 1;
         dp[3] = 1;
         for(int i=4; i<=n; i++){
-            dp[i] = (dp[i-2] + dp[i-3]) % 10007; //** 마지막에 나누는 것이 아니라 매번 나누기
+            dp[i] = (dp[i-2] + dp[i-3]) % 10007; //** 마지막에 나누는 것이 아니라 매번 나누기 ( 오버플로우 방지 )
         }
 
         System.out.println(dp[n]);
