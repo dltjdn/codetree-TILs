@@ -16,12 +16,9 @@ public class Main {
         dp[2] = 1;
         dp[3] = 1;
         for(int i=4; i<=n; i++){
-            dp[i] = dp[i-2] + dp[i-3];
+            dp[i] = (dp[i-2] + dp[i-3]) % 10007; //** 마지막에 나누는 것이 아니라 매번 나누기
         }
 
-        int ans;
-        if(dp[n] == 0) ans = 0;
-        else ans = dp[n] % 10007;
-        System.out.println(ans);
+        System.out.println(dp[n]);
     }
 }
