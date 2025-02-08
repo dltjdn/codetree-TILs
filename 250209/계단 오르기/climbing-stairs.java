@@ -6,7 +6,7 @@ public class Main {
         // Please write your code here.
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        dp = new int[n];
+        dp = new int[n+1];
 
         if(n==2 || n==3){
             System.out.println(1);
@@ -15,13 +15,13 @@ public class Main {
 
         dp[2] = 1;
         dp[3] = 1;
-        for(int i=4; i<n; i++){
-            dp[i] = Math.max(dp[i-2], dp[i-3])+1;
+        for(int i=4; i<=n; i++){
+            dp[i] = dp[i-2] + dp[i-3];
         }
 
         int ans;
-        if(dp[n-1] == 0) ans = 0;
-        else ans = dp[n-1] % 10007;
+        if(dp[n] == 0) ans = 0;
+        else ans = dp[n] % 10007;
         System.out.println(ans);
     }
 }
