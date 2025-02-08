@@ -35,6 +35,8 @@ public class Main {
         }
 
         for(int i=0; i<k; i++){
+            if(step[i] >= m-1) continue; // ** 조건추가
+
             step[i] += nums[idx];
                 
             backtrack(idx+1);
