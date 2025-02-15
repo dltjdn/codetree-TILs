@@ -21,8 +21,8 @@ public class Main {
 
     public static void backtrack(int start){
         if(path.size() == m){
-            int maxNum = 1;
-            for(int i=0; i<m; i++){
+            int maxNum = path.get(0);
+            for(int i=1; i<m; i++){
                 maxNum ^= path.get(i);
             }
             answer = Math.max(answer, maxNum);
