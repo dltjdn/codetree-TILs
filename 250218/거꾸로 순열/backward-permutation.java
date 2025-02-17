@@ -12,18 +12,15 @@ public class Main {
 
         backtrack();
 
-        for(int i=0; i<ans.size(); i++){
-            List<Integer> nums = ans.get(i);
-            for(int j=0; j<n; j++){
-                System.out.print(nums.get(j)+" ");
-            }
-            System.out.println();
-        }
+           
     }
 
     public static void backtrack(){
         if(path.size() == n){
-            ans.add(new ArrayList<>(path));
+            for(int j=0; j<n; j++){
+                System.out.print(path.get(j)+" ");
+            }
+            System.out.println();
             return;
         }
 
