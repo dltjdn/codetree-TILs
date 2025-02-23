@@ -17,19 +17,27 @@ public class Main {
             v[i] = sc.nextInt();
         }
         
+        init();
+
         // dp[i]: 무게가 i일 때 최대 가치
         for(int i=0; i<n; i++){
-            for(int j=m; j>=0; j--){
+            for(int j=m; j>=0; j--){ // 한번씩만 사용가능하므로 m -> 0 방향
                 if(j >= w[i]){
                     dp[j] = Math.max(dp[j-w[i]] + v[i], dp[j]);
                 }
             }
         }
 
-        int ans = -1;
+        int ans = 0; // 초기값 0 이여야함!
         for(int i=0; i<=m; i++){
             ans = Math.max(ans, dp[i]);
         }
         System.out.println(ans);
+    }
+
+    public static void init(){
+        Arrays.fill(dp, Integer.MIN_VALUE);
+
+        dp[0] = 0;
     }
 }
