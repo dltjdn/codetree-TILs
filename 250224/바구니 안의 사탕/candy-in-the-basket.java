@@ -23,8 +23,8 @@ public class Main {
         }
 
         int right = min;
-        int cnt = 0;
-        int ans = 0;
+        long cnt = 0;
+        long ans = 0;
         for(int left=min; left<=max-2*k; left++){
             while(right <= left+2*k){
                 if(map.containsKey(right)){
