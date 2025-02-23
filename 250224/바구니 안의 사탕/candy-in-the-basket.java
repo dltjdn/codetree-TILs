@@ -25,7 +25,7 @@ public class Main {
         long right = min;
         long cnt = 0;
         long ans = 0;
-        for(long left=min; left<=max-2*k; left++){
+        for(long left=min; left<=max; left++){
             while(right <= Math.min(left+2*k, max)){
                 if(map.containsKey(right)){
                     cnt += map.get(right);
