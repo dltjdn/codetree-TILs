@@ -2,7 +2,7 @@ import java.util.*;
 public class Main {
     public static int n,k;
     public static long min,max;
-    public static Map<Integer,Long> map = new HashMap<>();
+    public static Map<Long,Long> map = new HashMap<>();
     public static void main(String[] args) {
         // Please write your code here.
         Scanner sc = new Scanner(System.in);
