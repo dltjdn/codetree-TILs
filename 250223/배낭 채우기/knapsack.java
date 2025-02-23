@@ -21,7 +21,9 @@ public class Main {
 
         // dp[i]: 무게가 i일 때 최대 가치
         for(int i=0; i<n; i++){
-            for(int j=m; j>=0; j--){ // 한번씩만 사용가능하므로 m -> 0 방향
+            for(int j=m; j>=0; j--){ 
+                // 같은 보석을 중복하여 사용할 수 없기 때문에
+                // 반복문을 거꾸로 돌려 보석을 중복하여 사용하는 것을 방지합니다.    
                 if(j >= w[i]){
                     dp[j] = Math.max(dp[j-w[i]] + v[i], dp[j]);
                 }
