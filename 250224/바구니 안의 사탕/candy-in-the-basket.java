@@ -1,7 +1,7 @@
 import java.util.*;
 public class Main {
     public static int n,k;
-    public static int min,max;
+    public static long min,max;
     public static Map<Integer,Long> map = new HashMap<>();
     public static void main(String[] args) {
         // Please write your code here.
@@ -11,7 +11,7 @@ public class Main {
 
         for(int i=0; i<n; i++){
             long cnt = sc.nextInt();
-            int x = sc.nextInt();
+            long x = sc.nextInt();
             min = Math.min(min, x);
             max = Math.max(max, x);
 
@@ -22,10 +22,10 @@ public class Main {
             }
         }
 
-        int right = min;
+        long right = min;
         long cnt = 0;
         long ans = 0;
-        for(int left=min; left<=max-2*k; left++){
+        for(long left=min; left<=max-2*k; left++){
             while(right <= left+2*k){
                 if(map.containsKey(right)){
                     cnt += map.get(right);
