@@ -2,7 +2,7 @@ import java.util.*;
 public class Main {
     public static int n,k;
     public static int min,max;
-    public static Map<Integer,Integer> map = new HashMap<>();
+    public static Map<Integer,Long> map = new HashMap<>();
     public static void main(String[] args) {
         // Please write your code here.
         Scanner sc = new Scanner(System.in);
@@ -10,7 +10,7 @@ public class Main {
         k = sc.nextInt();
 
         for(int i=0; i<n; i++){
-            int cnt = sc.nextInt();
+            long cnt = sc.nextInt();
             int x = sc.nextInt();
             min = Math.min(min, x);
             max = Math.max(max, x);
