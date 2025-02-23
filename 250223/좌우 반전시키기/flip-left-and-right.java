@@ -15,15 +15,16 @@ public class Main {
         for(int i=1; i<n; i++){
             if(arr[i-1] == 0){
                 arr[i-1] = 1;
-                arr[i] = arr[i] == 1? 0:1;
+                arr[i] ^= 1;
 
                 if(i < n-1){
-                   arr[i+1] = arr[i+1] == 1? 0:1;
+                   arr[i+1] ^= 1;
                 }
                 cnt++;
             }
         }
 
+        // ** n==1 일수도 있으므로 n-2 은 인덱스 오류남
         if(arr[n-1] == 1){
             System.out.println(cnt);
         }else{
