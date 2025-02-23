@@ -18,7 +18,7 @@ public class Main {
             }
         }
 
-        int sum = 0;  
+        long sum = 0;  
         for(int i=1; i<=n-3; i++){
             if(a.charAt(i-1) == '(' && a.charAt(i) == '('){
                 sum += R[i+1];
