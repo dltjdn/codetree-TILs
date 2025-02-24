@@ -4,6 +4,7 @@ public class Main {
     public static int n;
     public static int[][] grid;
     public static boolean[][] visited;
+    public static int curSize;
     public static int maxSize = Integer.MIN_VALUE;
     public static int cnt = 0; //터지게 되는 블록의 수
 
@@ -20,8 +21,12 @@ public class Main {
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 if(!visited[i][j]){
-                    int size = dfs(i,j, grid[i][j], 1);
-                    if(size>=4) cnt++;
+                    curSize = 1;
+                    
+                    dfs(i, j, grid[i][j]);
+                    
+                    if(curSize >= 4) cnt++;
+                    maxSize = Math.max(maxSize, curSize);
                 }
             }
         }
@@ -29,7 +34,7 @@ public class Main {
         System.out.println(cnt +" " +maxSize);
     }
 
-    public static int dfs(int r, int c, int num, int size){
+    public static void dfs(int r, int c, int num){
         int[] dr = {-1,0,1,0};
         int[] dc = {0,1,0,-1};
         
@@ -40,12 +45,12 @@ public class Main {
             int nc = c + dc[d];
 
             if(inRange(nr,nc) && !visited[nr][nc] && grid[nr][nc] == num){
-                size += dfs(nr, nc, num, 1);
+                curSize++;
+                dfs(nr, nc, num);
             }
         }
 
-        maxSize = Math.max(maxSize, size);
-        return size; 
+       
     }
 
     public static boolean inRange(int r, int c){
