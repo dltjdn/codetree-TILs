@@ -30,22 +30,7 @@ public class Main {
         r2 = sc.nextInt()-1;
         c2 = sc.nextInt()-1;
         
-       getBrokedWall(0, new HashSet<>());
-
-       for(Set<Point> broked : brokedList){
-            // for(Point temp: broked){
-            //     System.out.println(temp.r+" "+temp.c);
-            // }
-            // System.out.println();
-            // 초기화
-            for(int i=0; i<n; i++){
-                Arrays.fill(visited[i], false);
-                Arrays.fill(step[i], 0);
-            }
-            q = new ArrayDeque<>();
-         
-            bfs(broked);
-       }
+       getBrokedWall(0,0);
         
         if(minTime == Integer.MAX_VALUE) minTime = -1;
         System.out.println(minTime);
@@ -53,7 +38,7 @@ public class Main {
     }
 
 
-    public static void bfs(Set<Point> broked){
+    public static void bfs(){
             int[] dr = {-1,0,1,0};
             int[] dc = {0,1,0,-1};
 
@@ -73,29 +58,34 @@ public class Main {
                     int nc = cur.c+dc[d];
                     Point next = new Point(nr,nc);
 
-                    if(next.inRange(n) && !visited[nr][nc]){
-                        if(grid[nr][nc] == 0 || (grid[nr][nc] == 1 && broked.contains(next))){
-                            q.add(next);
-                            visited[nr][nc] = true;
-                            step[nr][nc] = step[cur.r][cur.c] + 1;
-                        }
+                    if(next.inRange(n) && !visited[nr][nc] && grid[nr][nc] == 0){
+                        q.add(next);
+                        visited[nr][nc] = true;
+                        step[nr][nc] = step[cur.r][cur.c] + 1;
+                        
                     }
                 }
             }
     }
 
-    public static void getBrokedWall(int start, Set<Point> path){
-        if(path.size() == k){
-            brokedList.add(new HashSet<>(path));
+    public static void getBrokedWall(int start, int cnt){
+        if(cnt == k){
+            for(int i=0; i<n; i++){
+                Arrays.fill(visited[i], false);
+                Arrays.fill(step[i], 0);
+            }
+            q = new ArrayDeque<>();
+         
+            bfs();
             return;
         }
 
         for(int i=start; i<walls.size(); i++){
-            path.add(walls.get(i));
+            grid[walls.get(i).r][walls.get(i).c] = 0;
 
-            getBrokedWall(i+1, path);
+            getBrokedWall(i+1, cnt+1);
 
-            path.remove(walls.get(i));
+            grid[walls.get(i).r][walls.get(i).c] = 1;
         }
     }
 }
