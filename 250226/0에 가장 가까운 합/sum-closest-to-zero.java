@@ -18,7 +18,7 @@ public class Main {
         int left = 0;
         int right = n-1;
         int m = Integer.MAX_VALUE;
-        while(left <= right){
+        while(left < right){
             m = Math.min(m, Math.abs(arr[left]+arr[right]));
             if(arr[left]+arr[right] >= 0){
                 right--;
