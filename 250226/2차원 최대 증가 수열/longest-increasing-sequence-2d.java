@@ -14,8 +14,9 @@ public class Main {
                 grid[i][j] = sc.nextInt();
        
 
-        
+        for(int i=0; i<n; i++) Arrays.fill(dp[i], Integer.MIN_VALUE);
         dp[0][0] = 1; // i, j칸일 때 최대 수 
+
         for(int i=1; i<n; i++){
             for(int j=1; j<m; j++){
                 for(int k=1; k<=i; k++){
