@@ -13,14 +13,14 @@ public class Main {
             for (int j = 0; j < m; j++)
                 grid[i][j] = sc.nextInt();
        
-
-        for(int i=0; i<n; i++) Arrays.fill(dp[i], Integer.MIN_VALUE);
-        dp[0][0] = 1; // i, j칸일 때 최대 수 
+        init();
 
         for(int i=1; i<n; i++){
             for(int j=1; j<m; j++){
                 for(int k=1; k<=i; k++){
                     for(int l=1; l<=j; l++){
+                        if(dp[i-k][j-l] == Integer.MIN_VALUE) continue;
+
                         if(grid[i][j] > grid[i-k][j-l]){
                             dp[i][j] = Math.max(dp[i-k][j-l]+1, dp[i][j]);
                         }
@@ -40,6 +40,14 @@ public class Main {
         System.out.println(ans);
         
 
+
+    }
+
+    public static void init(){
+        // ** 초기화 필수
+        for(int i=0; i<n; i++) Arrays.fill(dp[i], Integer.MIN_VALUE);
+        
+        dp[0][0] = 1; // i, j칸일 때 최대 수 
 
     }
 }
