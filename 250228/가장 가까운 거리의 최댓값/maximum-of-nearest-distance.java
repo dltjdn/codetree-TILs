@@ -5,6 +5,7 @@ public class Main {
     public static Map<Integer, List<Node>> edges = new HashMap<>();
     public static Queue<Node> pq = new PriorityQueue<>();
     public static int[] dist;
+    public static int[] minD;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
@@ -13,7 +14,7 @@ public class Main {
         b = sc.nextInt();
         c = sc.nextInt();
         dist = new int[n+1];
-      
+        minD = new int[n+1];
         for (int i = 0; i < m; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
@@ -24,12 +25,26 @@ public class Main {
             edges.get(y).add(new Node(x,d));
         }
         
-        int ans = -1;
-        for(int s=1; s<=n; s++){
-            Arrays.fill(dist, (int)1e9);
+        Arrays.fill(dist, (int)1e9);
+        Arrays.fill(minD, (int)1e9);
 
+        dikstra(a);
+        dikstra(b);
+        dikstra(c);
+
+        int ans = -1;
+        for(int i=1; i<=n; i++){
+            ans = Math.max(ans, minD[i]);
+        }
+        System.out.println(ans);
+        
+        
+    }
+
+    public static void dikstra(int s){
             dist[s] = 0;
             pq.add(new Node(s, 0));
+            minD[s] = 0;
 
             while(!pq.isEmpty()){
                 int minX = pq.peek().x;
@@ -47,18 +62,13 @@ public class Main {
                     if(newDist < dist[targetX]){
                         dist[targetX] = newDist;
                         pq.add(new Node(targetX, newDist));
+                        minD[targetX] = Math.min(minD[targetX], newDist);
                     }
                 }
             }
-
-            ans = Math.max(ans, Math.min(Math.min(dist[a], dist[b]),dist[c]));
-
-        }
-        
-        System.out.println(ans);
-        
         
     }
+
 }
 
 class Node implements Comparable<Node>{
