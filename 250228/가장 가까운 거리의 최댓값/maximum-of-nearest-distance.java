@@ -25,7 +25,7 @@ public class Main {
             edges.get(y).add(new Node(x,d));
         }
         
-        Arrays.fill(dist, (int)1e9);
+
         Arrays.fill(minD, (int)1e9);
 
         dikstra(a);
@@ -42,9 +42,10 @@ public class Main {
     }
 
     public static void dikstra(int s){
+            Arrays.fill(dist, (int)1e9);
+
             dist[s] = 0;
             pq.add(new Node(s, 0));
-            minD[s] = 0;
 
             while(!pq.isEmpty()){
                 int minX = pq.peek().x;
