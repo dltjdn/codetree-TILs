@@ -1,25 +1,33 @@
 import java.util.*;
 public class Main {
-    public static Queue<Bomb> pq = new PriorityQueue<>();
+    public static List<Bomb> bombs = new ArrayList<>();
+    public static Queue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+        int maxTime = -1;
         for (int i = 0; i < n; i++) {
-            pq.add(new Bomb(sc.nextInt(), sc.nextInt()));
+            int score = sc.nextInt();
+            int time = sc.nextInt();
+            bombs.add(new Bomb(score, time));
+            maxTime = Math.max(maxTime, time);
         }
-        
-        int curTime= 0;
-        int sum = 0;
-        while(!pq.isEmpty()){
-            Bomb b = pq.remove();
 
-            if(b.time >= curTime + 1){
-                sum += b.score;
-                curTime++;
+        Collections.sort(bombs);
+
+        int ans = 0;
+        int j = 0;
+        for(int i=maxTime; i>=1; i--){
+            while(j < bombs.size() && i <= bombs.get(j).time){
+                pq.add(bombs.get(j).score);
+                j++;
             }
+
+            if(!pq.isEmpty()) ans += pq.remove();
         }
+
+        System.out.println(ans);
         
-        System.out.println(sum);
     }
 }
 
@@ -33,12 +41,13 @@ class Bomb implements Comparable<Bomb>{
     }
 
     @Override
-    public int compareTo(Bomb b){
-        if(this.time != b.time){
-            return Integer.compare(this.time, b.time);
-        }else{
-            return Integer.compare(b.score, this.score);
-        }
+    public int compareTo(Bomb b){ // 시간이 큰 순
+        return Integer.compare(b.time, this.time);
+        // if(this.time != b.time){
+        //     return Integer.compare(this.time, b.time);
+        // }else{
+        //     return Integer.compare(b.score, this.score);
+        // }
     }
 
 }
