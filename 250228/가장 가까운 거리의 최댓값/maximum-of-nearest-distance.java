@@ -42,7 +42,7 @@ public class Main {
     }
 
     public static void dikstra(int s){
-            Arrays.fill(dist, (int)1e9);
+            Arrays.fill(dist, (int)1e9); // ** 매번 초기화해야함
 
             dist[s] = 0;
             pq.add(new Node(s, 0));
