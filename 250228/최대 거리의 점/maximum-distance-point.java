@@ -34,7 +34,7 @@ public class Main {
     public static boolean isPossible(int mid){
         int cnt = 1;
         int cur = arr[0];
-        int i = 0;
+        int i = 1;
         while(i < arr.length){
             if(arr[i] - cur < mid){
                 i++;
@@ -42,6 +42,7 @@ public class Main {
             }
             cnt++;
             cur = arr[i];
+            i++;
         }
 
         return cnt >= m;
