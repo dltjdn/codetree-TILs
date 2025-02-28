@@ -2,6 +2,8 @@ import java.util.*;
 public class Main {
     public static int n,m;
     public static int[] arr;
+    public static int minValue = Integer.MAX_VALUE;
+    public static int maxValue = Integer.MIN_VALUE;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
@@ -9,10 +11,12 @@ public class Main {
         arr = new int[n];
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
+            minValue = Math.min(minValue, arr[i]);
+            maxValue = Math.max(maxValue, arr[i]);
         }
         
-        int left = 0;
-        int right = (int)1e9;
+        int left = minValue;
+        int right = maxValue;
         int ans = Integer.MIN_VALUE;
         while(left <= right){
             int mid = (left+right)/2;
