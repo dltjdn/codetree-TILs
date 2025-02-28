@@ -11,7 +11,7 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        Arrays.sort(arr);
+        Arrays.sort(arr); //** 정렬 필수!!!!!
         
         int left = 1;
         int right = (int)1e9;
