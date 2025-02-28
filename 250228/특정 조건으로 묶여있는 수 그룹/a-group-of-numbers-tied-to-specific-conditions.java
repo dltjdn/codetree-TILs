@@ -21,6 +21,8 @@ public class Main {
                 right++;
             }
             pq.add(right-left);
+
+            if(right == n) break;
         }
 
         if(n==1) System.out.println(1);
