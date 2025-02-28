@@ -29,15 +29,13 @@ public class Main {
 
     public static boolean isPossible(int mid){
         int cnt = 1;
-        int cur = arr[0];
-        int i = 0;
-        while(i < arr.length){
-            if(arr[i] - cur < mid){
-                i++;
-                continue;
+        int lastIdx = 0;
+
+        for(int i=1; i<n; i++){
+            if(arr[i] - arr[lastIdx] >= mid){
+                cnt++;
+                lastIdx = i;
             }
-            cnt++;
-            cur = arr[i];
         }
 
         return cnt >= m;
