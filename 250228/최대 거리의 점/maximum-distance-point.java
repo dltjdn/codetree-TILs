@@ -10,6 +10,8 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+
+        Arrays.sort(arr);
         
         int left = 1;
         int right = (int)1e9;
