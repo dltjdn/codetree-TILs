@@ -19,14 +19,16 @@ public class Main {
             while(right < n){
                 if(!map.containsKey(arr[right])){
                     map.put(arr[right],1);
+                    ans = Math.max(ans, right-left+1);
                 }else if(map.get(arr[right]) < k){
                     map.put(arr[right], map.get(arr[right])+1); 
+                    ans = Math.max(ans, right-left+1);
                 }else{
-                    ans = Math.max(ans, right-left);
                     break;
                 }
                 
                 right++;
+  
             }
 
             if(map.get(arr[left]) == 1){
