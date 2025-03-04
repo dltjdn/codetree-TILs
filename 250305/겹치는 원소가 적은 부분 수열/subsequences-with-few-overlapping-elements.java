@@ -16,26 +16,16 @@ public class Main {
 
         int right=0;
         for(int left=0; left<n; left++){
-            while(right < n){
-                if(!map.containsKey(arr[right])){
-                    map.put(arr[right],1);
-                    ans = Math.max(ans, right-left+1);
-                }else if(map.get(arr[right]) < k){
-                    map.put(arr[right], map.get(arr[right])+1); 
-                    ans = Math.max(ans, right-left+1);
-                }else{
-                    break;
-                }
-                
+            // ** getOrDefault 활용하기 
+            while(right < n && map.getOrDefault(arr[right],0) < k){
+                map.put(arr[right], map.getOrDefault(arr[right], 0) +1);
                 right++;
-  
             }
 
-            if(map.get(arr[left]) == 1){
-                map.remove(arr[left]);
-            }else if(map.get(arr[left]) > 1){
-                map.put(arr[left], map.get(arr[left])-1);
-            }
+            ans = Math.max(ans, right-left);
+
+    
+            map.put(arr[left], map.get(arr[left])-1);
         }
 
         System.out.println(ans);
