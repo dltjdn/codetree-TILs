@@ -37,7 +37,7 @@ public class Main {
         if(depth == m){
             for(int i=0; i<n; i++) Arrays.fill(visited[i], false);
 
-            for(Point start : starts){
+            for(Point start : starts){ // * 모든 start 큐에 넣고 탐색 시작도 가능
                 bfs(start);
             }
 
@@ -47,7 +47,7 @@ public class Main {
                     if(visited[i][j]) cnt++;
                 }
             }
-            
+
             ans = Math.max(ans, cnt);
 
         }
