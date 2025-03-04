@@ -33,19 +33,29 @@ public class Main {
         
     }
 
-    public static void backtrack(int s, int cnt){
-        if(cnt == m){
-            for(Point start : starts){
-                for(int i=0; i<n; i++) Arrays.fill(visited[i], false);
+    public static void backtrack(int s, int depth){
+        if(depth == m){
+            for(int i=0; i<n; i++) Arrays.fill(visited[i], false);
 
+            for(Point start : starts){
                 bfs(start);
-            } 
+            }
+
+            int cnt = 0 ;
+            for(int i=0; i<n; i++){
+                for(int j=0; j<n; j++){
+                    if(visited[i][j]) cnt++;
+                }
+            }
+            
+            ans = Math.max(ans, cnt);
+
         }
 
 
         for(int i=s; i<stones.size(); i++){
             grid[stones.get(i).r][stones.get(i).c] = 0;
-            backtrack(i+1, cnt+1);
+            backtrack(i+1, depth+1);
             grid[stones.get(i).r][stones.get(i).c] = 1;
         }
 
@@ -54,7 +64,6 @@ public class Main {
     public static void bfs(Point s){
         q.add(s);
         visited[s.r][s.c] = true;
-        int cnt = 1;
 
         while(!q.isEmpty()){
             Point cur = q.remove();
@@ -68,12 +77,9 @@ public class Main {
                 if(inRange(nr,nc) && !visited[nr][nc] && grid[nr][nc] == 0){
                     q.add(new Point(nr,nc));
                     visited[nr][nc] = true;
-                    cnt++;
                 }
             }
         }
-
-        ans = Math.max(ans, cnt);  // 현재 돌 제거 버전에서 가장 큰 수
     }
 
     public static boolean inRange(int r, int c){
