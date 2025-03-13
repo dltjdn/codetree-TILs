@@ -8,6 +8,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         arr = new int[n];
+        endOfArr = n;
         for(int i=0; i<n; i++){
             arr[i] = sc.nextInt();
         }
@@ -16,14 +17,8 @@ public class Main {
         int s2 = sc.nextInt()-1;
         int e2 = sc.nextInt()-1;
 
-        bomb(s1,e1, n);
-
-        // System.out.println(endOfArr);
-        // for(int i=0; i<endOfArr; i++){
-        //     System.out.println(arr[i]);
-        // }
-
-        bomb(s2,e2, endOfArr);
+        bomb(s1,e1);
+        bomb(s2,e2);
        
         System.out.println(endOfArr);
         for(int i=0; i<endOfArr; i++){
@@ -32,18 +27,21 @@ public class Main {
 
     }
 
-    public static void bomb(int s, int e, int len){
+    public static void bomb(int s, int e){
         int[] temp = new int[n];
-        endOfArr = 0;
-        for(int i=0; i<len; i++){
+        int endOfTempArr = 0; // ** endOfArr, endOfTempArr 따로 선언
+
+        for(int i=0; i<endOfArr; i++){
             if(i < s || i > e){
-                temp[endOfArr++] = arr[i];
+                temp[endOfTempArr++] = arr[i];
             }
         } 
 
-        for(int i=0; i<endOfArr; i++){
+        for(int i=0; i<endOfTempArr; i++){
             arr[i] = temp[i];
         }
+
+        endOfArr = endOfTempArr;
 
     }
 }
