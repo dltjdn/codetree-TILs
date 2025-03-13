@@ -14,13 +14,11 @@ public class Main {
         }
 
         dp = new int[n+1][n+1]; // a카드 i,b카드 i까지 진행했을 때 b의 최대점수
-        for(int i=0; i<=n; i++) Arrays.fill(dp[i], -(int)1e9);
-        dp[0][0] = 0;
-
+    
+      
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
-                if(dp[i][j] == -(int)1e9) continue;
-
+              
                 if(a[i+1] < b[j+1]){
                     dp[i+1][j] = Math.max(dp[i+1][j], dp[i][j]);
                 }
@@ -29,9 +27,9 @@ public class Main {
                     dp[i][j+1] = Math.max(dp[i][j+1], dp[i][j] + b[j+1]);
                 }
 
-               //if(a[i+1] == b[j+1]){
+               if(a[i+1] == b[j+1]){
                     dp[i+1][j+1] = Math.max(dp[i+1][j+1], dp[i][j]);
-                //}
+                }
 
             }
         }
