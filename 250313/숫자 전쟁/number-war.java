@@ -29,9 +29,10 @@ public class Main {
                     dp[i][j+1] = Math.max(dp[i][j+1], dp[i][j] + b[j+1]);
                 }
 
-               if(a[i+1] == b[j+1]){
-                    dp[i+1][j+1] = Math.max(dp[i+1][j+1], dp[i][j]);
-                }
+                //1카드대결,2카드버리기 모두 고려
+                // if(a[i+1] == b[j+1]) (x)
+                dp[i+1][j+1] = Math.max(dp[i+1][j+1], dp[i][j]);
+                
 
             }
         }
