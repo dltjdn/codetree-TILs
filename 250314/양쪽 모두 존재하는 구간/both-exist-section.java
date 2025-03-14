@@ -25,16 +25,17 @@ public class Main {
                 right++;
             }
             //System.out.println(left+ " "+right);
-            if(right == n) break;
           
             //2. 구간 밖에서 1~M 존재 확인 
             if(in.keySet().size() == m && out.keySet().size() == m){
+                
                 ans = Math.min(ans, right-left);
             }
             
             // 3. left 구간에 포함된 수 제거 
             if(in.get(arr[left]) <= 1) in.remove(arr[left]);
             else in.put(arr[left], in.get(arr[left])-1);
+            
             out.put(arr[left], out.getOrDefault(arr[left], 0)+1);
         }
 
