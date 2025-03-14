@@ -10,7 +10,7 @@ public class Main {
         for (int i = 0; i < m; i++)
             arr[i] = sc.nextInt();
        
-        long left = 0;
+        long left = 1;
         long right = (long)1e14; // **long 고려하기
         long ans = Integer.MAX_VALUE;
         while(left <= right){
