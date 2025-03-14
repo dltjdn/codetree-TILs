@@ -10,7 +10,7 @@ public class Main {
         for (int i = 0; i < m; i++)
             arr[i] = sc.nextInt();
        
-        long left = 0;
+        long left = 1;
         long right = (int)1e14; // **long 고려하기
         long ans = Integer.MAX_VALUE;
         while(left <= right){
@@ -28,11 +28,11 @@ public class Main {
     }
 
     public static boolean isPossible(long mid){
-        long sum = 0;
+        long cnt = 0;
         for(int i=0; i<m; i++){
-            sum += (mid / arr[i]);
+            cnt += (mid / arr[i]);
         }
-        return sum >= n;
+        return cnt >= n;
     }
 
 }
