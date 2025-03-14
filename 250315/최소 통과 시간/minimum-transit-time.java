@@ -12,7 +12,7 @@ public class Main {
        
         long left = 1;
         long right = (long)1e14; // **long 고려하기
-        long ans = Integer.MAX_VALUE;
+        long ans = Long.MAX_VALUE;
         while(left <= right){
             long mid = (left+right)/2; // 최소 시간
 
