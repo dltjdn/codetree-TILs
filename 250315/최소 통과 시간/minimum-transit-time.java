@@ -10,9 +10,9 @@ public class Main {
         for (int i = 0; i < m; i++)
             arr[i] = sc.nextInt();
        
-        long left = 1;
+        long left = 0;
         long right = (long)1e14; // **long 고려하기
-        long ans = Long.MAX_VALUE;
+        long ans = Long.MAX_VALUE; // 최댓값 long에 맞게 
         while(left <= right){
             long mid = (left+right)/2; // 최소 시간
 
