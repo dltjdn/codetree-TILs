@@ -10,8 +10,8 @@ public class Main {
         for (int i = 0; i < m; i++)
             arr[i] = sc.nextInt();
        
-        long left = 1;
-        long right = (int)1e14; // **long 고려하기
+        long left = 0;
+        long right = (long)1e14; // **long 고려하기
         long ans = Integer.MAX_VALUE;
         while(left <= right){
             long mid = (left+right)/2; // 최소 시간
