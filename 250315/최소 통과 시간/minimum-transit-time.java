@@ -11,7 +11,7 @@ public class Main {
             arr[i] = sc.nextInt();
        
         int left = 0;
-        int right = (int)1e14;
+        int right = (int)1e9;
         int ans = Integer.MAX_VALUE;
         while(left <= right){
             int mid = (left+right)/2; // 최소 시간
