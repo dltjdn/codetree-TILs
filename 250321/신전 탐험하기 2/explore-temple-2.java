@@ -42,6 +42,7 @@ public class Main {
         //     }
         // }
 
+        // ** 마지막에 첫행 마지막 행 다른 경우만 답 되도록 체크하면 됨
         int ans = Integer.MIN_VALUE;
         for(int col=0; col<3; col++){
             for(int j=0; j<3; j++){
