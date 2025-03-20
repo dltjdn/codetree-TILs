@@ -9,43 +9,39 @@ public class Main {
         arr = new int[n][3];
         dp = new int[3][n][3]; // 시작 열 i, j행, k열 
         for (int i = 0; i < n; i++) {
-            arr[i][0] = sc.nextInt();
-            arr[i][1] = sc.nextInt();
-            arr[i][2] = sc.nextInt();
+            for(int j=0; j<3; j++){
+                arr[i][j] = sc.nextInt();
+            }
         }
 
         init();
         
         for(int col=0; col<3; col++){
-            for(int i=1; i<n-1; i++){
-                dp[col][i][0] = Math.max(dp[col][i-1][1], dp[col][i-1][2]) + arr[i][0];
-                dp[col][i][1] = Math.max(dp[col][i-1][0], dp[col][i-1][2]) + arr[i][1];
-                dp[col][i][2] = Math.max(dp[col][i-1][0], dp[col][i-1][1]) + arr[i][2];
-            }
-        }
-
-        for(int col=0; col<3; col++){
-            for(int j=0; j<3; j++){
-                if(col == j) continue;
-
-                for(int k=0; k<3; k++){
-                    if(j == k) continue;
-
-                    dp[col][n-1][j] = Math.max(dp[col][n-1][j], dp[col][n-2][k]+arr[n-1][j]);
+            for(int i=1; i<n; i++){
+                for(int j=0; j<3; j++){
+                    for(int k=0; k<3; k++){
+                        if(j == k) continue;
+                        
+                        dp[col][i][j] = Math.max(dp[col][i][j], dp[col][i-1][k] + arr[i][j]);
+                    }
                 }
-            
+              
             }
         }
 
-                // dp[0][n-1][1] = Math.max(dp[0][n-2][0], dp[0][n-2][2]) + arr[n-1][1];
-                // dp[0][n-1][2] = Math.max(dp[0][n-2][0], dp[0][n-2][1]) + arr[n-1][2];
+        // for(int col=0; col<3; col++){
+        //     for(int j=0; j<3; j++){
+        //         if(col == j) continue;
 
-                // dp[1][n-1][0] = Math.max(dp[1][n-2][1], dp[1][n-2][2]) + arr[n-1][0];
-                // dp[1][n-1][2] = Math.max(dp[1][n-2][0], dp[1][n-2][1]) + arr[n-1][2];
+        //         for(int k=0; k<3; k++){
+        //             if(j == k) continue;
 
-                // dp[2][n-1][0] = Math.max(dp[2][n-2][1], dp[2][n-2][2]) + arr[n-1][0];
-                // dp[2][n-1][1] = Math.max(dp[2][n-2][0], dp[2][n-2][2]) + arr[n-1][1];
-       
+        //             dp[col][n-1][j] = Math.max(dp[col][n-1][j], dp[col][n-2][k]+arr[n-1][j]);
+        //         }
+            
+        //     }
+        // }
+
         int ans = Integer.MIN_VALUE;
         for(int col=0; col<3; col++){
             for(int j=0; j<3; j++){
